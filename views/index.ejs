@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="raspberrypi">
+  <head>
+    <title>Raspberry Pi control platform</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Latest compiled and minified CSS -->
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js'></script>
+  <script src="javascripts/controllers/main.js"></script>
+   <script src="javascripts/time.js"></script>
+  <script>
+  </script>
+  </head>
+  <body onload="startTime()">
+  <div ng-controller ="charact" class="row row-centered">  
+    <div style="margin-top: 100px" class="col-md-3">
+    <ul class="nav nav-pills nav-stacked">
+    <li role="presentation" class="active"><a href="/"><span class="glyphicon glyphicon-info-sign"></span> Basic information</a></li>
+    <li role="presentation"><a href="/admin"><span class="glyphicon glyphicon-dashboard"></span> Control panel</a></li>
+    <li role="presentation"><a href="/api/charact"><span class="glyphicon glyphicon-book"></span> API</a></li>
+    </ul>
+    </div>
+
+    <div class="col-sm-6">    
+    <div class="page-header"> 
+    <h2 class="text-center">
+    <strong>Raspberry Pi control platform 
+    </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <small id="txt"></small>
+    </h2> 
+    </div>
+    <div style="margin-top: 40px" class="container-fluid">
+        <div ng-show="charact" width="50px"  class="jumbotron">
+          <p><strong>Hostname:</strong> {{ charact.hostname }}</p>
+          <p><strong>Type:</strong> {{ charact.type }}</p>
+          <p><strong>Platform:</strong> {{ charact.platform }}</p>
+          <p><strong>Architecture:</strong> {{ charact.arch }}</p>
+          <p><strong>Release:</strong> {{ charact.release }}</p>
+          <p><strong>Uptime:</strong> {{ charact.uptime/3600 | number : 0}}h</p>
+          <p><strong>Free memory: <div class="progress progress-striped active">
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">{{ charact.freemem/charact.totalmem*100 | number : 2 }}%
+          </div>
+          </div></strong>
+          </p>
+          <p><strong>Cpu model:</strong> {{ charact.cpus[0].model }}</p>
+          <p><strong>MAC address:</strong> {{ charact.networkInterfaces.Ethernet[0].mac }}</p>
+          <p><strong>IP address 1:</strong> {{ charact.networkInterfaces.Ethernet[1].address }}</p>          
+          <p><strong>IP address 2: </strong>{{ charact.networkInterfaces.Ethernet[2].address }}</p>          
+          <p><strong>IPv6 address:</strong> {{ charact.networkInterfaces.Ethernet[0].address }}</p>
+        </div>
+    </div>
+    </div>
+    <div style= "margin-top: 50px" class="col-md-3">
+    <img width="400px" src="images/raspberrypi.jpg" />
+    <div width="50px">
+      <div ng-show="connected" class="alert alert-success text-center" role="alert"><span class="glyphicon glyphicon-thumbs-up"></span> Connected to Raspberry Pi</div>
+      <div ng-show="!connected" class="alert alert-danger text-center" role="alert"><span class="glyphicon glyphicon-alert"></span> Couldn't connect!</div> 
+      <div ></div>
+    </div>
+    </div>
+
+    </div>
+    <div style= "background-color: grey" class="row row-centered footer">
+    <div class="col-md-8">.col-md-8</div>
+    <div class="col-md-4">.col-md-4</div>
+    </div>
+  </body>
+
+</html>
