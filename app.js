@@ -24,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api', api);
-app.use('/admin', admin);
 //app.use('/admin', admin);
 
 // catch 404 and forward to error handler
